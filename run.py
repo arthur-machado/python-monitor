@@ -1,37 +1,31 @@
 import psutil
 import time
+import socket
 
+def get_cpu_usage():
 
-def get_cpu_usage(duration):
-    timeout = time.time() + duration
+    return psutil.cpu_percent(interval=1)
+        
 
-    while True:
-        print (psutil.cpu_percent(interval=1))
-        #time.sleep(1)
-
-        if time.time() > timeout:
-            break
-
-def get_mem_usage(duration):
-    timeout = time.time() + duration
+def get_mem_usage():
+    
     mem = psutil.virtual_memory()
 
-    while True:
-        print (mem.percent)
-        time.sleep(1)
+    return mem.percent
 
-        if time.time() > timeout:
-            break
+def get_IP():
+    print (socket.getfqdn(socket.gethostname()))
 
+    
+    
+     
 # =========================================================
 
-print( "O que você quer monitorar?" )
-action = int(input( "1-CPU; 2-Memória; 3-Disco:   "))
-
-length = float(input("Por quanto tempo você quer monitorar(segundos)?: "))
-
-if action == 1:
-    get_cpu_usage(length)
-elif action == 2:
-    get_mem_usage(length)
-
+print("=" * 39)
+print("||      CPU      ||      MEMORY       ||")
+print("=" * 39)
+get_IP()
+while True:
+    print("||     "+str(get_cpu_usage())+"%      ||      "+str(get_mem_usage())+"%       ||")
+    print("-"*39)
+    time.sleep(1)
