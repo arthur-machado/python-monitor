@@ -1,3 +1,3 @@
-# lynx-monitor
+# python-monitor
 
 Um monitor de recursos via terminal utilizando Python. 
