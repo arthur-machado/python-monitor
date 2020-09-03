@@ -1,6 +1,6 @@
 import psutil
 import time
-import socket
+#import socket
 
 def get_cpu_usage():
 
@@ -13,11 +13,12 @@ def get_mem_usage():
 
     return str(mem.percent)
 
-def get_IP():
-    hostname = socket.gethostname()
-    ip = socket.gethostbyname(hostname)
+#está retornando o endereço local (127.0.0.1) 
+#def get_IP():
+    #hostname = socket.gethostname()
+    #ip = socket.gethostbyname(hostname)
 
-    return ip
+    #return ip
 
 def get_disk():
     return str(psutil.disk_usage('/').percent)
