@@ -1,5 +1,5 @@
-import psutil
-import time
+import psutil, time, platform
+
 #import socket
 
 # retorna a porcentagem de uso da CPU no intervalo de 1 segundo
@@ -26,6 +26,15 @@ def get_disk():
     
     return str(psutil.disk_usage('/').percent)
 
+
+# boas-vindas
+print("\nWelcome to the Python Monitor! :)\nBy Arthur Machado (github.com/arthur-machado) \n\n")
+
+# imprime informações da máquina no início do programa
+print("CPU model: " + platform.processor())
+print ("OS: " + platform.platform())
+
+
 # desenha o cabeçalho do monitor
 print("=" * 59)
 print("||      CPU      ||      MEMORY       ||      DISK       ||")
@@ -33,6 +42,6 @@ print("=" * 59)
 
 #imprime as informações enquanto o programa rodar
 while True:
-    print("||     "+ get_cpu_usage()+"%      ||      "+get_mem_usage()+"%       ||      "+get_disk()+"%      ||")
+    print("||     "+ get_cpu_usage()+"%      ||      "+get_mem_usage()+"%        ||      "+get_disk()+"%      ||")
     print("-"*59)
     time.sleep(1)
