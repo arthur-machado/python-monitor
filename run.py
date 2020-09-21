@@ -5,7 +5,14 @@ import psutil, time, platform
 # retorna a porcentagem de uso da CPU no intervalo de 1 segundo
 def get_cpu_usage():
 
-    return str(psutil.cpu_percent(interval=1))
+    use = psutil.cpu_percent(interval=1)
+    use_str = str(use)
+
+    if use < 45:
+        return u"\u001b[32;1m" + use_str
+    
+    elif use >= 45 and use < 75:
+        return u"\u001b[33m" + use_str
 
 # retorna a porcentagem de uso da memória
 def get_mem_usage():
@@ -28,20 +35,25 @@ def get_disk():
 
 
 # boas-vindas
-print("\nWelcome to the Python Monitor! :)\nBy Arthur Machado (github.com/arthur-machado) \n\n")
+print("\nWelcome to the Python Monitor! :)\nBy Arthur Machado (github.com/arthur-machado) \n")
 
 # imprime informações da máquina no início do programa
 print("CPU model: " + platform.processor())
 print ("OS: " + platform.platform())
+print("Disk usage: " + get_disk()+"%\n")
 
 
 # desenha o cabeçalho do monitor
-print("=" * 59)
-print("||      CPU      ||      MEMORY       ||      DISK       ||")
-print("=" * 59)
+print(u"\u001b[37;1m=" * 40)
+print(u"\u001b[37;1m||      CPU      ||      MEMORY       ||")
+print(u"\u001b[37;1m=" * 40)
 
 #imprime as informações enquanto o programa rodar
 while True:
-    print("||     "+ get_cpu_usage()+"%      ||      "+get_mem_usage()+"%        ||      "+get_disk()+"%      ||")
-    print("-"*59)
-    time.sleep(1)
+    try:
+        print(u"\u001b[37;1m||     "+ get_cpu_usage()+"%      \u001b[37;1m||      "+get_mem_usage()+"%       \u001b[37;1m||")
+        print(u"\u001b[37;1m-"*40)
+        time.sleep(1)
+    except KeyboardInterrupt:
+        print("\nPrograma finalizado!")
+        break
