@@ -20,18 +20,18 @@ def get_cpu_usage():
 # retorna a porcentagem de uso da memória
 def get_mem_usage():
     
-    mem_total = psutil.virtual_memory().total / (1024 ** 3)
+    mem_total = psutil.virtual_memory().total / (1024 ** 3) # converte para GB
     mem_used = psutil.virtual_memory().used / (1024 ** 3)
-    percent = round((mem_used * 100 / mem_total), 1)
+    percent = round((mem_used * 100 / mem_total), 1) # calcula porcentagem e arredonda
     mem_str = str(percent)
 
     if percent < 45.0:
         return u"\u001b[32;1m" + mem_str
     
-    elif percent >= 45 and percent <= 83.9:
+    elif percent >= 45 and percent <= 84.9:
         return u"\u001b[33m" + mem_str
 
-    elif percent >= 84:
+    elif percent >= 85:
         return u"\033[1;31;40m" + mem_str
 
 
@@ -68,7 +68,7 @@ while True:
     try:
         print(u"\u001b[37;1m||     "+ get_cpu_usage()+"%      \u001b[37;1m||      "+get_mem_usage()+"%        \u001b[37;1m||")
         print(u"\u001b[37;1m-"*40)
-        time.sleep(1)
+        time.sleep(0.8)
     
     except KeyboardInterrupt:
         print("\nPrograma finalizado!")
